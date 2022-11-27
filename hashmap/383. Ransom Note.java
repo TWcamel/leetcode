@@ -1,5 +1,8 @@
 public class Solution {
   /*
+   * 解法一： HashMap方法，
+   * 因為題目要求字串 Megazine 能組成字串 RansomNote，
+   * 反向不需要確認, 因此可以使用解法二： array 法
    * Time: O(n)
    * Space: O(n)
    */
@@ -23,5 +26,32 @@ public class Solution {
         res = false;
     }
     return res;
+  }
+}
+
+public class Solution {
+  /*
+   * 解法二： array 法，
+   * Time: O(n)
+   * Space: O(1)
+   */
+  public boolean canConstruct(String ransomNote, String magazine) {
+    int[] record = new int[26];
+
+    for (Character c : magazine.toCharArray()) {
+      record[c - 'a']++;
+    }
+
+    for (Character c : ransomNote.toCharArray()) {
+      record[c - 'a']--;
+    }
+
+    for (int i : record) {
+      if (i < 0)
+        return false;
+    }
+
+    return true;
+
   }
 }
